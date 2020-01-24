@@ -1,0 +1,12 @@
+{
+	"country": "India",
+	"state": "Karnataka",
+	"city": "Bengaluru",
+	"background": 1,
+	"color":[0,0,0],
+	"size":[900,900],
+	"markers": [{
+		"locations": ["bank"],
+		"markers": "&"
+	}]
+}
