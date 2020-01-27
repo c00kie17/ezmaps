@@ -1,6 +1,5 @@
 import sys
 
-
 def print_iter(message):
 	sys.stdout.write('\r')
 	sys.stdout.write(message)

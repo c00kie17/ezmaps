@@ -25,5 +25,8 @@ setup(
         ]
     },
     install_requires=[
+        'tqdm',
+        'pillow',
+        'requests'
     ],
 )

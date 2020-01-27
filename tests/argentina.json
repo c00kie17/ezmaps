@@ -1,0 +1,11 @@
+{
+	"details":{
+		"place": "Argentina",
+		"level":2,
+		"background": [0,78,140],
+		"color":[255,255,255],
+		"size":[900,1800],
+		"detail":2
+	},
+	"markers": []
+}
