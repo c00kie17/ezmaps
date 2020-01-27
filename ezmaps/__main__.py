@@ -4,10 +4,6 @@ from ezmaps.ezmap import mapObj
 from ezmaps.markers import add_markers
 from tqdm import tqdm
 
-#teststates
-#check if no icon
-#check icon runs from another folder
-
 def get_args():
 	parser = argparse.ArgumentParser(description='Generating Maps')
 	parser.add_argument('-c','--config',metavar='CONF', help='config file you need to generate map with', required=True)
@@ -26,9 +22,10 @@ def main():
 	ezmap = mapObj(data,args.config.split('/')[-1].replace('.json',''))
 	if args.load:
 		ezmap.load_state(args.load)
-	ezmap.get_place()
-	ezmap.fetch_bounds()
-	ezmap.load_child_roads()
+	else:
+		ezmap.get_place()
+		ezmap.fetch_bounds()
+		ezmap.load_child_roads()
 	ezmap.get_map_boundies()
 	if args.save != None:
 		ezmap.save_state()
@@ -41,11 +38,11 @@ def main():
 	pbar = tqdm(total = len(data['markers']),desc='markers')
 	for markers in data['markers']:
 		for location in markers['locations']:
-			add_markers(location,markers['icon'],markers['size'],ezmap,data['details'])
+			add_markers(location,markers['icon'],markers['size'],ezmap,data['details'],"/".join(args.config.split('/')[:-1]))
 		pbar.update(1)
 	pbar.close()
 	print('Generated Markers')
-	ezmap.save_image()
+	ezmap.save_image("/".join(args.config.split('/')[:-1]))
 
 if __name__ == '__main__':
 	main()

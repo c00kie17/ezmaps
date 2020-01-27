@@ -4,19 +4,26 @@ import os
 from ezmaps.util import *
 
 
-def add_markers(value,icon,size,ezmap,details):
-	icon = load_icon(os.path.join(os.getcwd(),'./icons/'+icon),size,ezmap,details['size'])
-	cords = get_locations(value,ezmap)
-	cords = normalize(cords,ezmap)
-	draw(cords,icon,ezmap)
+def add_markers(value,icon,size,ezmap,details,path):
+	icon = load_icon(os.path.join(path,'icons/'+icon),size,ezmap,details['size'])
+	if icon:
+		cords = get_locations(value,ezmap)
+		cords = normalize(cords,ezmap)
+		draw(cords,icon,ezmap)
+	else:
+		return
 
 def load_icon(path,size,ezmap,output_size):
-	icon = Image.open(path)
-	imgWidth,imgHeight = ezmap.img.size
-	width = int(((size*100/output_size[0])*imgWidth)/100)
-	height = int(((size*100/output_size[1])*imgHeight)/100)
-	icon = icon.resize((width,height), Image.ANTIALIAS)
-	return icon
+	try:
+		icon = Image.open(path)
+	except FileNotFoundError:
+		return None
+	else:
+		imgWidth,imgHeight = ezmap.img.size
+		width = int(((size*100/output_size[0])*imgWidth)/100)
+		height = int(((size*100/output_size[1])*imgHeight)/100)
+		icon = icon.resize((width,height), Image.ANTIALIAS)
+		return icon
 
 def get_locations(value,ezmap):
 	if isinstance(value, list):

@@ -142,7 +142,7 @@ class mapObj():
 			self.img = Image.new('RGB', (width,height), (255, 255, 255))
 			self.convert_transparent()
 		elif self:
-			self.img = Image.new('RGB', (width,height), (for val in self.data['details']['background']))
+			self.img = Image.new('RGB', (width,height), tuple(self.data['details']['background']))
 
 	def convert_transparent(self):
 		self.img = self.img.convert("RGBA")
@@ -155,11 +155,11 @@ class mapObj():
 		        newData.append(item)
 		self.img.putdata(newData)
 
-	def save_image(self):
+	def save_image(self,path):
 		self.img = self.img.resize((self.data['details']['size'][0],self.data['details']['size'][1]), Image.ANTIALIAS)
 		self.img = ImageOps.mirror(self.img)
 		self.img = self.img.rotate(180, Image.NEAREST, expand=1)
-		self.img.save(os.path.join(os.getcwd(),self.filename+'.png'),"PNG")
+		self.img.save(os.path.join(path,self.filename+'.png'),"PNG")
 
 	def generate(self):
 		draw = ImageDraw.Draw(self.img)
