@@ -111,7 +111,7 @@ class mapObj():
 	def load_state(self,path):
 		with open(path, 'rb') as handle:
 			state = pickle.load(handle)
-			if self.data['place'] == state['data']['details']['place'] and self.data['level'] == state['data']['details']['level']:
+			if self.data['details']['place'] == state['data']['details']['place'] and self.data['details']['level'] == state['data']['details']['level']:
 				self.map = state['map']
 				self.roads = state['roads']
 				self.bounds = state['bounds']
