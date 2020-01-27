@@ -7,6 +7,7 @@ import operator
 from functools import reduce
 from json.decoder import JSONDecodeError
 from ezmaps.util import *
+import pickle
 
 highwayKeys = ['motorway','motorway_link','trunk','trunk_link','primary','primary_link','secondary','secondary_link','tertiary','tertiary_link','service','residential']
 
@@ -17,8 +18,6 @@ class mapObj():
 		self.scriptPath = os.path.dirname(os.path.realpath(sys.argv[0]))
 		self.data = data
 		self.scaleValue = 1000000
-		self.get_place()
-		self.bounds = self.fetch_bounds()
 		print('Loaded Locations')
 
 	def get_place(self):
@@ -46,17 +45,12 @@ class mapObj():
 				self.map = children[0]
 			except IndexError:
 				exit_error('No place '+self.data['details']['place'].title()+' found')
-	#FIX
+
 	def fetch_bounds(self):
 		query ='area('+str(self.map['id'])+');(rel(area)[name="'+self.map['tags']['name']+'"];);(._;>;);out geom;'
 		bounds = overpassManager.request_overpass(query)
-		try:
-			return self.get_element(bounds,['type'],'way')
-		except TypeError:
-			#FIX
-			print('bounds error')
-			print(bounds)
-		sys.exit()
+		self.bounds = self.get_element(bounds,['type'],'way')
+
 
 	def get_element(self,obj,key,value):
 		elementArray = []
@@ -99,6 +93,22 @@ class mapObj():
 			"maxlon":max(allLon)
 		}
 
+	def save_state(self):
+		state = {
+			"map":self.map,
+			"roads":self.roads,
+			"bounds":self.bounds
+		}
+		with open(self.filename+'.pickle', 'wb') as handle:
+			pickle.dump(state,handle,protocol=pickle.HIGHEST_PROTOCOL)
+
+	def load_state(self,path):
+		with open(path, 'rb') as handle:
+			state = pickle.load(handle)
+			self.map = state['map']
+			self.roads = state['roads']
+			self.bounds = state['bounds']
+
 	def set_scale(self):
 		done = True
 		while done:
@@ -128,13 +138,11 @@ class mapObj():
 	def create_img(self):
 		width = self.normBoundry['maxlon']
 		height = self.normBoundry['maxlat']
-		if self.data['details']['background'] == 1:
-			self.img = Image.new('RGB', (width,height), (255, 255, 255))
-		elif self.data['details']['background'] == -1:
+		if self.data['details']['background'] == -1:
 			self.img = Image.new('RGB', (width,height), (255, 255, 255))
 			self.convert_transparent()
-		else:
-			self.img = Image.new('RGB', (width,height), (0, 0, 0))
+		elif self:
+			self.img = Image.new('RGB', (width,height), (for val in self.data['details']['background']))
 
 	def convert_transparent(self):
 		self.img = self.img.convert("RGBA")
