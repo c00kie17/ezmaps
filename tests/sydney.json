@@ -2,14 +2,14 @@
 	"details":{
 		"place": "Sydney",
 		"level":7,
-		"background": [247, 242, 232],
-		"color":[0,0,0],
-		"size":[2500,1800],
+		"background": [148, 222, 244],
+		"color":[255,255,255],
+		"size":5000,
 		"detail":6
 	},
 	"markers": [{
-		"locations": ["police"],
-		"icon": "police.png",
+		"locations": ["cafe"],
+		"icon": "coffee.png",
 		"size": 30
 	}]
 }
