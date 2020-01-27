@@ -1,7 +1,7 @@
-from overpass import overpassManager
+from ezmaps.overpass import overpassManager
 from PIL import Image,ImageDraw,ImageOps
 import os
-from util import *
+from ezmaps.util import *
 
 
 def add_markers(value,icon,size,ezmap,details):

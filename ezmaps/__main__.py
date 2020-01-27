@@ -1,7 +1,7 @@
 import argparse
 import json
-from map import mapObj
-from markers import add_markers
+from ezmaps.ezmap import mapObj
+from ezmaps.markers import add_markers
 from tqdm import tqdm
 
 #get CLI working

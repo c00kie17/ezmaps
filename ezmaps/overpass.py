@@ -1,7 +1,7 @@
 import requests
 import json
 from time import sleep
-from util import print_iter,print_warning
+from ezmaps.util import print_iter,print_warning
 import sys
 
 queryPrepend = '[out:json][timeout:500];'
