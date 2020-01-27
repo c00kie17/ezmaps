@@ -1,0 +1,15 @@
+{
+	"details":{
+		"place": "Sydney",
+		"level":7,
+		"background": 0,
+		"color":[255,255,255],
+		"size":[1800,1800],
+		"detail":5
+	},
+	"markers": [{
+		"locations": ["police"],
+		"icon": "police.png",
+		"size": 30
+	}]
+}

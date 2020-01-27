@@ -1,0 +1,15 @@
+{
+	"details":{
+		"place": "Singapore",
+		"level":2,
+		"background": 1,
+		"color":[105, 205, 150],
+		"size":[1800,1800],
+		"detail":6
+	},
+	"markers": [{
+		"locations": ["hospital"],
+		"icon": "hospital.png",
+		"size": 30
+	}]
+}

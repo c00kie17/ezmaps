@@ -1,0 +1,15 @@
+{
+	"details":{
+		"place": "California",
+		"level":4,
+		"background": -1,
+		"color":[199, 147, 204],
+		"size":[1800,1800],
+		"detail":2
+	},
+	"markers": [{
+		"locations": [[37.765008, -122.430972],[34.075150, -118.395071]],
+		"icon": "cross.png",
+		"size": 30
+	}]
+}
