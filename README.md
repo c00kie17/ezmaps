@@ -60,7 +60,7 @@
 All `json` files for the examples can be found in `tests` folder
 
 ### Sydney
-Marking all Police Stations in Sydney
+Marking all cafes in Sydney
 ![sydney](https://user-images.githubusercontent.com/10531093/73218456-0690e580-4180-11ea-81ed-c51c80c1dd27.png)
 
 
