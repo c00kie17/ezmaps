@@ -21,30 +21,35 @@ class mapObj():
 		print('Loaded Locations')
 
 	def get_place(self):
-		query = 'area[name='+self.data['details']['place'].title()+']["admin_level"='+str(self.data['details']['level'])+'];out geom;'
+		query = 'area["name:en"="'+self.data['details']['place'].title()+'"]["admin_level"='+str(self.data['details']['level'])+'];out geom;'
+		query += 'area["name"="'+self.data['details']['place'].title()+'"]["admin_level"='+str(self.data['details']['level'])+'];out geom;'
 		codes = []
-		children = overpassManager.request_overpass(query)['elements']
-		options = []
-		count = 0
-		if len(children) > 1:
-			for child in children:
-				childTags = child['tags']
-				if all(x in childTags.keys() for x in ['place', 'name', 'wikipedia', 'wikidata']):
-					if childTags['wikidata'] not in codes:
-						print_option(str(count+1)+'.'+childTags['place'].capitalize()+':'+childTags['name']+','+childTags['wikipedia'].replace('en:',''))
-						codes.append(childTags['wikidata'])
-						options.append(child)
-						count += 1
-			value = input("Enter Digit for your Option: ")
-			if value.isnumeric() or (value > len(children)):
-				self.map = options[int(value)-1]
+		children = overpassManager.request_overpass(query)
+		if children:
+			children = children['elements']
+			options = []
+			count = 0
+			if len(children) > 1:
+				for child in children:
+					childTags = child['tags']
+					if all(x in childTags.keys() for x in ['place', 'name', 'wikipedia', 'wikidata']):
+						if childTags['wikidata'] not in codes:
+							print_option(str(count+1)+'.'+childTags['place'].capitalize()+':'+childTags['name']+','+childTags['wikipedia'].replace('en:',''))
+							codes.append(childTags['wikidata'])
+							options.append(child)
+							count += 1
+				value = input("Enter Digit for your Option: ")
+				if value.isnumeric() or (value > len(children)):
+					self.map = options[int(value)-1]
+				else:
+					exit_error('Wrong Input Entered')
 			else:
-				exit_error('Wrong Input Entered')
+				try:
+					self.map = children[0]
+				except IndexError:
+					exit_error('No place '+self.data['details']['place'].title()+' found')
 		else:
-			try:
-				self.map = children[0]
-			except IndexError:
-				exit_error('No place '+self.data['details']['place'].title()+' found')
+			exit_error('No place '+self.data['details']['place'].title()+' found')
 
 	def fetch_bounds(self):
 		query ='area('+str(self.map['id'])+');(rel(area)[name="'+self.map['tags']['name']+'"];);(._;>;);out geom;'
@@ -95,6 +100,7 @@ class mapObj():
 
 	def save_state(self,path):
 		state = {
+			"data":self.data,
 			"map":self.map,
 			"roads":self.roads,
 			"bounds":self.bounds
@@ -105,9 +111,12 @@ class mapObj():
 	def load_state(self,path):
 		with open(path, 'rb') as handle:
 			state = pickle.load(handle)
-			self.map = state['map']
-			self.roads = state['roads']
-			self.bounds = state['bounds']
+			if self.data['place'] == state['data']['details']['place'] and self.data['level'] == state['data']['details']['level']:
+				self.map = state['map']
+				self.roads = state['roads']
+				self.bounds = state['bounds']
+			else:
+				exit_error('Config and State do not match')
 
 	def set_scale(self):
 		done = True
