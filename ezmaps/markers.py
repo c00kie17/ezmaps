@@ -20,8 +20,12 @@ def load_icon(path,size,ezmap,output_size):
 		return None
 	else:
 		imgWidth,imgHeight = ezmap.img.size
-		width = int(((size*100/output_size[0])*imgWidth)/100)
-		height = int(((size*100/output_size[1])*imgHeight)/100)
+		if isinstance(output_size,list):
+			width = int(((size*100/output_size[0])*imgWidth)/100)
+			height = int(((size*100/output_size[1])*imgHeight)/100)
+		elif isinstance(output_size,int):
+			width = size
+			height = size
 		icon = icon.resize((width,height), Image.ANTIALIAS)
 		return icon
 
@@ -47,6 +51,9 @@ def draw(cords,icon,ezmap):
 	for cord in cords:
 		myicon = ImageOps.mirror(icon)
 		myicon = myicon.rotate(180, Image.NEAREST, expand=1)
-		ezmap.img.paste(myicon,(cord[1],cord[0]),myicon)
+		try:
+			ezmap.img.paste(myicon,(cord[1],cord[0]),myicon)
+		except ValueError:
+			exit_error('invalid icon file')
 
 
