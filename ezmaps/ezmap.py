@@ -93,13 +93,13 @@ class mapObj():
 			"maxlon":max(allLon)
 		}
 
-	def save_state(self):
+	def save_state(self,path):
 		state = {
 			"map":self.map,
 			"roads":self.roads,
 			"bounds":self.bounds
 		}
-		with open(self.filename+'.pickle', 'wb') as handle:
+		with open(os.path.join(path,self.filename+'.pickle'), 'wb') as handle:
 			pickle.dump(state,handle,protocol=pickle.HIGHEST_PROTOCOL)
 
 	def load_state(self,path):
