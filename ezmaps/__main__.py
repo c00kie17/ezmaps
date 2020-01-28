@@ -35,12 +35,13 @@ def main():
 	ezmap.create_img()
 	ezmap.generate()
 	print('Generated Map')
-	pbar = tqdm(total = len(data['markers']),desc='markers')
-	for markers in data['markers']:
-		for location in markers['locations']:
-			add_markers(location,markers['icon'],markers['size'],ezmap,data['details'],"/".join(args.config.split('/')[:-1]))
-		pbar.update(1)
-	pbar.close()
+	if 'markers' in data.keys():
+		pbar = tqdm(total = len(data['markers']),desc='markers')
+		for markers in data['markers']:
+			for location in markers['locations']:
+				add_markers(location,markers['icon'],markers['size'],ezmap,data['details'],"/".join(args.config.split('/')[:-1]))
+			pbar.update(1)
+		pbar.close()
 	print('Generated Markers')
 	ezmap.save_image("/".join(args.config.split('/')[:-1]))
 
