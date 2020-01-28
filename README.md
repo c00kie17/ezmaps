@@ -46,8 +46,7 @@
 |key|type|description|
 |----|----|----|
 |`[details],[place]`|`string`| The name of the place you want to generate the map for
-|`[details][level]`|`integer`|Administrative level for the place you can find the level for your place [here](https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative#10_admin_le
-vel_values_for_specific_countries)
+|`[details][level]`|`integer`|Administrative level for the place you can find the level for your place [here](https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative#10_admin_level_values_for_specific_countries)
 |`[details][background]`|`list or integer`|RGB value of the color you want or `-1`-Transparent
 |`[details][color]`|`list`|RGB values for the color you want the map to be drawn in
 |`[details][size]`|`list or integer`|`width and height` of the output image (The actual image will be resized to this value). If just an `integer` is provided it returns the natural scale of the map with the integer as the max height or width value allowed
@@ -101,6 +100,7 @@ Please submit all pull requests the against master branch.
 
 <a name="ls"></a>
 ## License
- - [**MIT**](http://opensource.org/licenses/MIT)
+
+[**MIT**](http://opensource.org/licenses/MIT)
 
 
