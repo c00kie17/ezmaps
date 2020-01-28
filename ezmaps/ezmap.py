@@ -46,7 +46,7 @@ class mapObj():
 			options = []
 			for result in results:
 				childTags = result['tags']
-				if all(x in childTags.keys() for x in ['place', 'name', 'wikipedia', 'wikidata']):
+				if all(x in childTags.keys() for x in ['name', 'wikipedia', 'wikidata']):
 					if childTags['wikidata'] not in codes:
 						options.append(result)
 						codes.append(childTags['wikidata'])
