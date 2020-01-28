@@ -6,7 +6,7 @@ with open("README.md", "r",encoding='utf-8') as fh:
 
 setup(
     name='ezmaps',
-    version = '1.0.0',
+    version = '1.1.0',
     description= 'Generate Beautiful Maps',
     author = 'c00kie17',
     author_email = 'anshul1708@gmail.com',

@@ -27,7 +27,7 @@ def main():
 		ezmap.fetch_bounds()
 		ezmap.load_child_roads()
 	ezmap.get_map_boundies()
-	if args.save != None:
+	if args.save:
 		ezmap.save_state("/".join(args.config.split('/')[:-1]))
 	print('Loaded Map')
 	ezmap.set_scale()
