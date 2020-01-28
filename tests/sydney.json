@@ -10,6 +10,6 @@
 	"markers": [{
 		"locations": ["cafe"],
 		"icon": "coffee.png",
-		"size": 30
+		"size": 5
 	}]
 }
