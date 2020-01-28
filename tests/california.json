@@ -4,12 +4,12 @@
 		"level":4,
 		"background": -1,
 		"color":[199, 147, 204],
-		"size":[900,1300],
+		"size":[346,500],
 		"detail":3
 	},
 	"markers": [{
 		"locations": [[37.765008, -122.430972],[34.075150, -118.395071]],
 		"icon": "cross.png",
-		"size": 30
+		"size": 10
 	}]
 }
