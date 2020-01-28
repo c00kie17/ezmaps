@@ -25,16 +25,18 @@ class mapObj():
 		query += 'area["name"="'+self.data['details']['place'].title()+'"]["admin_level"='+str(self.data['details']['level'])+'];out geom;'
 		children = overpassManager.request_overpass(query)
 		options = self.get_options(children)
-
-		count = 1
-		for option in options:
-			print_option(str(count)+'. '+option['tags']['name']+','+option['tags']['wikipedia'])
-			count += 1
-		answer = input('Please enter the number for your option: ')
-		if answer.isnumeric() and (int(answer)) < len(options):
-			self.map = options[int(answer)-1]
+		if len(options) > 1:
+			count = 1
+			for option in options:
+				print_option(str(count)+'. '+option['tags']['name']+','+option['tags']['wikipedia'])
+				count += 1
+			answer = input('Please enter the number for your option: ')
+			if answer.isnumeric() and (int(answer)) < len(options):
+				self.map = options[int(answer)-1]
+			else:
+				exit_error('Invalid input: '+str(answer))
 		else:
-			exit_error('Invalid input: '+str(answer))
+			self.map = options[0]
 
 	def get_options(self,results):
 		options = []
