@@ -1,0 +1,15 @@
+{
+	"details":{
+		"place": "Shibuya",
+		"level":7,
+		"background": [46,47,48],
+		"color":[255,255,255],
+		"size":1000,
+		"detail":6
+	},
+	"markers": [{
+		"locations": ["hospital"],
+		"icon": "hospital.png",
+		"size": 10
+	}]
+}

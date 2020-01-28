@@ -71,7 +71,14 @@ Custom Marking `Los Angeles` and `San Francisco` in California
 ![california](https://user-images.githubusercontent.com/10531093/73245150-9448f100-41d1-11ea-9da7-dc6b30258cf5.png)
 
 ### Argentina
-![argentina](https://user-images.githubusercontent.com/10531093/73247150-4682b780-41d6-11ea-9741-488ad202ffcb.png)
+![argentina](https://user-images.githubusercontent.com/10531093/73247934-fc9ad100-41d7-11ea-8600-c18e266175cb.png)
+
+
+### Shibuya
+Marking all `hospitals` in Shibuya
+
+![shibuya](https://user-images.githubusercontent.com/10531093/73247776-a7f75600-41d7-11ea-8bda-24088e4671bd.png)
+
 
 <a name="tb"></a>
 ## Troubleshooting
