@@ -46,24 +46,15 @@
 |key|type|description|
 |----|----|----|
 |`[details],[place]`|`string`| The name of the place you want to generate the map for
-
 |`[details][level]`|`integer`|Administrative level for the place you can find the level for your place [here]([https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative#10_admin_le
 vel_values_for_specific_countries](https://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative#10_admin_level_values_for_specific_countries))
-
 |`[details][background]`|`list or integer`|RGB value of the color you want or `-1`-Transparent
-
 |`[details][color]`|`list`|RGB values for the color you want the map to be drawn in
-
 |`[details][size]`|`list or integer`|`width and height` of the output image (The actual image will be resized to this value). If just an `integer` is provided it returns the natural scale of the map with the integer as the max height or width value allowed
-
 |`[details][detail]`|`list`|How many level of roads do you want in your image higher the number the lower the level of roads fetched
-
 |`[markers]`|`list`|A list of markers you want marked on your image
-
 |`[markers][locations]`|`list or string`|A list of longitude or latitude for custom markers or a string specifying a type of important location
-
 |`[markers][icon]`|`string`|Path to the icon you want the mark the marker with will search in folder `icon` in the location where the config file is located
-
 |`[markers][size]`|`integer`|Size of the icon in the final image in `pixles`
 
 <a name="exam"></a>
