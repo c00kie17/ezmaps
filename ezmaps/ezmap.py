@@ -18,6 +18,9 @@ class mapObj():
 		self.scriptPath = os.path.dirname(os.path.realpath(sys.argv[0]))
 		self.data = data
 		self.scaleValue = 1000000
+		self.maxScale = 10000
+		if isinstance(self.data['details']['size'],int):
+			self.maxScale = self.data['details']['size']
 		print('Loaded Locations')
 
 	def get_place(self):
@@ -134,7 +137,7 @@ class mapObj():
 				temp[key] = int(value*self.scaleValue)
 			height = temp['maxlat'] - temp['minlat']
 			width = temp['maxlon'] - temp['minlon']
-			if width > 10000 or height > 10000:
+			if width > self.maxScale or height > self.maxScale:
 				self.scaleValue = self.scaleValue/10
 			else:
 				self.boundry = temp
