@@ -23,33 +23,39 @@ class mapObj():
 	def get_place(self):
 		query = 'area["name:en"="'+self.data['details']['place'].title()+'"]["admin_level"='+str(self.data['details']['level'])+'];out geom;'
 		query += 'area["name"="'+self.data['details']['place'].title()+'"]["admin_level"='+str(self.data['details']['level'])+'];out geom;'
-		codes = []
 		children = overpassManager.request_overpass(query)
-		if children:
-			children = children['elements']
+		options = self.get_options(children)
+
+		count = 1
+		for option in options:
+			print_option(str(count)+'. '+option['tags']['name']+','+option['tags']['wikipedia'])
+			count += 1
+		answer = input('Please enter the number for your option: ')
+		if answer.isnumeric() and (int(answer)) < len(options):
+			self.map = options[int(answer)-1]
+		else:
+			exit_error('Invalid input: '+str(answer))
+
+	def get_options(self,results):
+		options = []
+		codes = []
+		if results:
+			results = results['elements']
 			options = []
-			count = 0
-			if len(children) > 1:
-				for child in children:
-					childTags = child['tags']
-					if all(x in childTags.keys() for x in ['place', 'name', 'wikipedia', 'wikidata']):
-						if childTags['wikidata'] not in codes:
-							print_option(str(count+1)+'.'+childTags['place'].capitalize()+':'+childTags['name']+','+childTags['wikipedia'].replace('en:',''))
-							codes.append(childTags['wikidata'])
-							options.append(child)
-							count += 1
-				value = input("Enter Digit for your Option: ")
-				if value.isnumeric() or (value > len(children)):
-					self.map = options[int(value)-1]
-				else:
-					exit_error('Wrong Input Entered')
-			else:
-				try:
-					self.map = children[0]
-				except IndexError:
-					exit_error('No place '+self.data['details']['place'].title()+' found')
+			for result in results:
+				childTags = result['tags']
+				if all(x in childTags.keys() for x in ['place', 'name', 'wikipedia', 'wikidata']):
+					if childTags['wikidata'] not in codes:
+						options.append(result)
+						codes.append(childTags['wikidata'])
 		else:
 			exit_error('No place '+self.data['details']['place'].title()+' found')
+
+		if len(options) > 0:
+			return options
+		else:
+			exit_error('No place '+self.data['details']['place'].title()+' found')
+
 
 	def fetch_bounds(self):
 		query ='area('+str(self.map['id'])+');(rel(area)[name="'+self.map['tags']['name']+'"];);(._;>;);out geom;'
@@ -165,7 +171,8 @@ class mapObj():
 		self.img.putdata(newData)
 
 	def save_image(self,path):
-		self.img = self.img.resize((self.data['details']['size'][0],self.data['details']['size'][1]), Image.ANTIALIAS)
+		if isinstance(self.data['details']['size'],list):
+			self.img = self.img.resize((self.data['details']['size'][0],self.data['details']['size'][1]), Image.ANTIALIAS)
 		self.img = ImageOps.mirror(self.img)
 		self.img = self.img.rotate(180, Image.NEAREST, expand=1)
 		self.img.save(os.path.join(path,self.filename+'.png'),"PNG")
@@ -173,6 +180,6 @@ class mapObj():
 	def generate(self):
 		draw = ImageDraw.Draw(self.img)
 		for roadList in self.roads:
-			for i in range(1,len(roadList)):
-				draw.line((roadList[i]['lon'],roadList[i]['lat'],roadList[i-1]['lon'],roadList[i-1]['lat']), fill=tuple(i for i in self.data['details']['color']) )
+			xy = [(val['lon'],val['lat']) for val in roadList]
+			draw.polygon(xy, outline=tuple(self.data['details']['color']) )
 		del draw
