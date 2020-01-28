@@ -20,25 +20,25 @@
 * ezmaps takes a few arguments
 
 			* -c , --config  Path to your config file
-			* -s , --save		 If you save the state of this run
-			* -l , --load		Load an old state (pickle file) to avoid makes calls to the API
+			* -s , --save    If you save the state of this run
+			* -l , --load	 Load an old state (pickle file) to avoid makes calls to the API
 
 * The config file is in the `json` format and has the following information
 ````
 {
-		"details":{
-			"place": "Sydney"
-		    "level":7,
-		    "background": [0,0,0],
-			"color":[255,255,255],
-			"size":[2500,1800],
-			"detail":6
-		 },
-		"markers": [{
-			"locations": ["police"],
-			 "icon": "police.png",
-			 "size": 30
-		 }]
+	"details":{
+		"place": "Sydney"
+		"level":7,
+		"background": [0,0,0],
+	    "color":[255,255,255],
+	    "size":[2500,1800],
+		"detail":6
+	},
+	"markers": [{
+		"locations": ["police"],
+		"icon": "police.png",
+		"size": 30
+	}]
 }
 ````
 
@@ -61,7 +61,7 @@ All `json` files for the examples can be found in `tests` folder
 
 ### Sydney
 Marking all cafes in Sydney
-![sydney](https://user-images.githubusercontent.com/10531093/73218456-0690e580-4180-11ea-81ed-c51c80c1dd27.png)
+![sydney](https://user-images.githubusercontent.com/10531093/73243416-74afc980-41cd-11ea-8a28-d0aace2914c1.png)
 
 
 ### California
@@ -73,6 +73,7 @@ Custom Marking `Los Angeles` and `San Francisco` in California
 
 - All this data is obtained from [Overpass]([https://wiki.openstreetmap.org/wiki/Overpass_API](https://wiki.openstreetmap.org/wiki/Overpass_API)) which is rate-limited so to avoid getting stuck in the rate-limit try saving and loading states as much as possible
 -  If you find any bug or error please create an Issue on this repository
+
 
 <a name="cb"></a>
 ## Contributing
