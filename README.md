@@ -71,7 +71,7 @@ Custom Marking `Los Angeles` and `San Francisco` in California
 ![california](https://user-images.githubusercontent.com/10531093/73245150-9448f100-41d1-11ea-9da7-dc6b30258cf5.png)
 
 ### Argentina
-![argentina](https://user-images.githubusercontent.com/10531093/73247006-f9064a80-41d5-11ea-9c8d-379a88e9158a.png)
+![argentina](https://user-images.githubusercontent.com/10531093/73247150-4682b780-41d6-11ea-9741-488ad202ffcb.png)
 
 <a name="tb"></a>
 ## Troubleshooting
